@@ -13,18 +13,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sing up"/>
+            android:text="@string/signup_tab"/>
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="login"/>
+            android:text="@string/login_tab"/>
+
     </com.google.android.material.tabs.TabLayout>
     
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:id="@+id/view_pager"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
