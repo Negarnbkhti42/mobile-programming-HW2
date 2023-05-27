@@ -4,5 +4,5 @@
     <string name="login_tab">login</string>
     <string name="username_hint">username</string>
     <string name="password_hint">password</string>
-    <string name="password_repeat_hint">repeat password</string>
+    <string name="password_confirm_hint">confirm password</string>
 </resources>
