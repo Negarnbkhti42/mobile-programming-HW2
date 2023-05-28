@@ -3,6 +3,7 @@
     <string name="signup_tab">signup</string>
     <string name="login_tab">login</string>
     <string name="username_hint">username</string>
+    <string name="nickname_hint">nickname</string>
     <string name="password_hint">password</string>
     <string name="password_confirm_hint">confirm password</string>
 </resources>
