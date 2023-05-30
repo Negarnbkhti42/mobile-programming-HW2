@@ -60,7 +60,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Description"
@@ -86,7 +86,35 @@
                 android:text="@string/book_sample_description"
                 android:textColor="?colorOnSecondary" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/buy_book" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Comments"
+                android:textColor="?colorOnSecondary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edittext_background"
+                android:gravity="top|start"
+                android:hint="write your comment..."
+                android:inputType="textLongMessage"
+                android:lines="8"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp" />
+
         </LinearLayout>
+
 
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
