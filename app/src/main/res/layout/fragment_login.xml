@@ -17,6 +17,7 @@
             android:id="@+id/signupUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/edittext_background"
             android:layout_gravity="center"
             android:inputType="textPersonName"
             android:layout_marginTop="30dp"
@@ -28,8 +29,10 @@
             android:id="@+id/signupPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/edittext_background"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
+            android:padding="8dp"
             android:inputType="textPassword"
             android:autofillHints="password"
             android:hint="@string/password_hint"/>
