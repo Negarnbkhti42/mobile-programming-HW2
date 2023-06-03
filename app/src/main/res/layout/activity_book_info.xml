@@ -63,7 +63,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Description"
+                    android:text="@string/description_header"
                     android:textColor="?colorOnSecondary"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -92,26 +92,44 @@
                 android:layout_marginTop="15dp"
                 android:text="@string/buy_book" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Comments"
-                android:textColor="?colorOnSecondary"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/edittext_background"
-                android:gravity="top|start"
-                android:hint="write your comment..."
-                android:inputType="textLongMessage"
-                android:lines="8"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="4dp" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/comments_header"
+                    android:textColor="?colorOnSecondary"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edittext_background"
+                    android:gravity="top|start"
+                    android:hint="write your comment..."
+                    android:inputType="textLongMessage"
+                    android:lines="8"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="4dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
