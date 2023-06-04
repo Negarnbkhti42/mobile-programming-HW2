@@ -1,5 +1,7 @@
 package com.example.bookshelf;
 
+import android.app.Activity;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -8,8 +10,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class RegisterationViewAdapter extends FragmentStateAdapter {
 
-    public RegisterationViewAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    private Activity activity;
+
+    public RegisterationViewAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, Activity activity) {
         super(fragmentManager, lifecycle);
+        this.activity = activity;
     }
 
     @NonNull
@@ -17,9 +22,9 @@ public class RegisterationViewAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
 
         if (position == 1) {
-            return  new SignupTabFragment();
+            return  new SignupTabFragment(this.activity);
         }
-        return new LoginTabFragment();
+        return new LoginTabFragment(this.activity);
     }
 
     @Override

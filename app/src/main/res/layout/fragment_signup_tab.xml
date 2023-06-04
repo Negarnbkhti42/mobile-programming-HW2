@@ -23,7 +23,7 @@
             android:layout_marginTop="30dp"
             android:padding="8dp"
             android:autofillHints="username"
-            android:hint="@string/username_hint" />
+            android:hint="@string/username" />
 
         <EditText
             android:id="@+id/signup_nickname"
@@ -35,7 +35,7 @@
             android:layout_marginTop="30dp"
             android:padding="8dp"
             android:autofillHints="name"
-            android:hint="@string/nickname_hint" />
+            android:hint="@string/nickname" />
 
         <EditText
             android:id="@+id/signup_password"
@@ -47,7 +47,7 @@
             android:inputType="textPassword"
             android:padding="8dp"
             android:autofillHints="password"
-            android:hint="@string/password_hint"/>
+            android:hint="@string/password"/>
 
         <EditText
             android:id="@+id/signup_password_confirm"
@@ -59,9 +59,10 @@
             android:inputType="textPassword"
             android:padding="8dp"
             android:autofillHints="password"
-            android:hint="@string/password_confirm_hint"/>
+            android:hint="@string/confirm_password"/>
 
         <Button
+            android:id="@+id/signup_button"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

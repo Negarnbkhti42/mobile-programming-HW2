@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
-    private RegisterationViewAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Sign up"));
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        adapter = new RegisterationViewAdapter(fragmentManager, getLifecycle());
+        RegisterationViewAdapter adapter = new RegisterationViewAdapter(fragmentManager, getLifecycle(), this);
 
         viewPager2.setAdapter(adapter);
 
