@@ -8,4 +8,10 @@
     <string name="cart_menu_item">cart</string>
     <string name="favorite_menu_item">favorite</string>
     <string name="profile_menu_item">profile</string>
+    <string name="username">username</string>
+    <string name="nickname">nickname</string>
+    <string name="password_edit_button">edit password</string>
+    <string name="submit_button">submit</string>
+    <string name="logout">logout</string>
+    <string name="delete_account">delete account</string>
 </resources>
