@@ -4,4 +4,8 @@
     <string name="cart_fragment">cart fragment</string>
     <string name="favorite_fragment">favorite fragment</string>
     <string name="profile_fragment">profile_fragment</string>
+    <string name="home_menu_item">home</string>
+    <string name="cart_menu_item">cart</string>
+    <string name="favorite_menu_item">favorite</string>
+    <string name="profile_menu_item">profile</string>
 </resources>
