@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 public class HomeFragment extends Fragment {
 
-    public static FavoriteFragment newInstance(String param1, String param2) {
+    public static FavoriteFragment newInstance() {
         FavoriteFragment fragment = new FavoriteFragment();
 
         return fragment;

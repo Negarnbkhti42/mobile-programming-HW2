@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 public class CartFragment extends Fragment {
 
-    public static CartFragment newInstance(String param1, String param2) {
+    public static CartFragment newInstance() {
         CartFragment fragment = new CartFragment();
 
         return fragment;
