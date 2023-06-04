@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupTabFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:padding="20dp">
+
+
+        <EditText
+            android:id="@+id/signup_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_background"
+            android:layout_gravity="center"
+            android:inputType="textPersonName"
+            android:layout_marginTop="30dp"
+            android:padding="8dp"
+            android:autofillHints="username"
+            android:hint="@string/username_hint" />
+
+        <EditText
+            android:id="@+id/signup_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_background"
+            android:layout_gravity="center"
+            android:inputType="textPersonName"
+            android:layout_marginTop="30dp"
+            android:padding="8dp"
+            android:autofillHints="name"
+            android:hint="@string/nickname_hint" />
+
+        <EditText
+            android:id="@+id/signup_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_background"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:inputType="textPassword"
+            android:padding="8dp"
+            android:autofillHints="password"
+            android:hint="@string/password_hint"/>
+
+        <EditText
+            android:id="@+id/signup_password_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_background"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:inputType="textPassword"
+            android:padding="8dp"
+            android:autofillHints="password"
+            android:hint="@string/password_confirm_hint"/>
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:text="@string/signup_tab"/>
+    </LinearLayout>
+
+</LinearLayout>
