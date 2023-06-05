@@ -1,5 +1,23 @@
 <resources>
     <string name="app_name">Bookshelf</string>
+    <string name="home_fragment">home fragment</string>
+    <string name="cart_fragment">cart fragment</string>
+    <string name="favorite_fragment">favorite fragment</string>
+    <string name="profile_fragment">profile_fragment</string>
+    <string name="home_menu_item">home</string>
+    <string name="cart_menu_item">cart</string>
+    <string name="favorite_menu_item">favorite</string>
+    <string name="profile_menu_item">profile</string>
+    <string name="username">username</string>
+    <string name="nickname">nickname</string>
+    <string name="password">password</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="password_edit_button">edit password</string>
+    <string name="submit_button">submit</string>
+    <string name="logout">logout</string>
+    <string name="delete_account">delete account</string>
+    <string name="signup_tab">signup</string>
+    <string name="login_tab">login</string>
     <string name="description_header">Description</string>
     <string name="comments_header">Comments</string>
     <string name="buy_book">Add to cart</string>
