@@ -1,5 +1,6 @@
 package com.example.bookshelf;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 
@@ -41,6 +43,8 @@ public class ProfileFragment extends Fragment {
         Button editPasswordButton = (Button) view.findViewById(R.id.edit_password_button);
         Button submitPasswordEdit = (Button) view.findViewById(R.id.submit_password_edit_button);
 
+        ImageButton settingButton = (ImageButton) view.findViewById(R.id.btn_view_settings);
+
         EditText newPasswordInput = (EditText) view.findViewById(R.id.new_password_input);
 
         LinearLayout editPasswordField = (LinearLayout) view.findViewById(R.id.password_edit_field);
@@ -59,6 +63,14 @@ public class ProfileFragment extends Fragment {
                 newPasswordInput.setText("");
                 editPasswordField.setVisibility(View.GONE);
                 editPasswordButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        settingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                getActivity().startActivity(intent);
             }
         });
     }
