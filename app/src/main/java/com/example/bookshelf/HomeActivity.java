@@ -3,6 +3,7 @@ package com.example.bookshelf;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
@@ -18,31 +19,46 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        final HomeFragment homeFragment = HomeFragment.newInstance();
+        final FavoriteFragment favoriteFragment = FavoriteFragment.newInstance();
+        final CartFragment cartFragment = CartFragment.newInstance();
+        final ProfileFragment profileFragment = ProfileFragment.newInstance();
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        final Fragment[] selectedFragment = {homeFragment};
+
+        fragmentManager.beginTransaction().add(R.id.home_layout, favoriteFragment, "favorite").hide(favoriteFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.home_layout, cartFragment, "cart").hide(cartFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.home_layout, profileFragment, "profile").hide(profileFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.home_layout, homeFragment, "home").commit();
+
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
                 int itemId = item.getItemId();
                 if (itemId == R.id.action_home) {
-                    selectedFragment = HomeFragment.newInstance();
+                    fragmentManager.beginTransaction().hide(selectedFragment[0]).show(homeFragment).commit();
+                    selectedFragment[0] = homeFragment;
+                    return true;
                 } else if (itemId == R.id.action_cart) {
-                    selectedFragment = CartFragment.newInstance();
+                    fragmentManager.beginTransaction().hide(selectedFragment[0]).show(cartFragment).commit();
+                    selectedFragment[0] = cartFragment;
+                    return true;
                 } else if (itemId == R.id.action_favorite) {
-                    selectedFragment = FavoriteFragment.newInstance();
+                    fragmentManager.beginTransaction().hide(selectedFragment[0]).show(favoriteFragment).commit();
+                    selectedFragment[0] = favoriteFragment;
+                    return true;
                 } else if (itemId == R.id.action_profile) {
-                    selectedFragment = ProfileFragment.newInstance();
+                    fragmentManager.beginTransaction().hide(selectedFragment[0]).show(profileFragment).commit();
+                    selectedFragment[0] = profileFragment;
+                    return true;
                 }
 
-                if (selectedFragment != null) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.home_layout, selectedFragment).commit();
-                }
-                return true;
+                return false;
             }
         });
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.home_layout, HomeFragment.newInstance()).commit();
 
     }
 }
