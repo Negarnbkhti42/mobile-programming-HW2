@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Sign up"));
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        RegisterationViewAdapter adapter = new RegisterationViewAdapter(fragmentManager, getLifecycle(), this);
+        RegisterationViewAdapter adapter = new RegisterationViewAdapter(fragmentManager, getLifecycle());
 
         viewPager2.setAdapter(adapter);
 

@@ -17,9 +17,6 @@ public class LoginTabFragment extends Fragment {
 
     private Activity activity;
 
-    public LoginTabFragment(Activity activity) {
-        this.activity = activity;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,6 +28,8 @@ public class LoginTabFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        activity = getActivity();
 
         Button signupButton = (Button) view.findViewById(R.id.login_button);
         signupButton.setOnClickListener(new View.OnClickListener() {

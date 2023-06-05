@@ -16,9 +16,7 @@ import android.widget.Button;
 public class SignupTabFragment extends Fragment {
 
     private Activity activity;
-    public SignupTabFragment(Activity activity) {
-        this.activity = activity;
-    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,6 +29,8 @@ public class SignupTabFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        activity = getActivity();
 
         Button signupButton = (Button) view.findViewById(R.id.signup_button);
         signupButton.setOnClickListener(new View.OnClickListener() {

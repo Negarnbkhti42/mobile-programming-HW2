@@ -10,11 +10,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class RegisterationViewAdapter extends FragmentStateAdapter {
 
-    private Activity activity;
 
-    public RegisterationViewAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, Activity activity) {
+    public RegisterationViewAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
-        this.activity = activity;
     }
 
     @NonNull
@@ -22,9 +20,9 @@ public class RegisterationViewAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
 
         if (position == 1) {
-            return  new SignupTabFragment(this.activity);
+            return  new SignupTabFragment();
         }
-        return new LoginTabFragment(this.activity);
+        return new LoginTabFragment();
     }
 
     @Override
