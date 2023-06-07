@@ -69,47 +69,72 @@
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="10dp">
 
-        <Button
+        <TextView
             android:id="@+id/edit_password_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingVertical="10dp"
             android:text="@string/password_edit_button"
-            android:layout_margin="0dp"/>
+            android:textSize="20sp" />
 
-        <LinearLayout
-            android:id="@+id/password_edit_field"
-            android:visibility="gone"
+<!--        <LinearLayout-->
+<!--            android:id="@+id/password_edit_field"-->
+<!--            android:visibility="gone"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+<!--            <EditText-->
+<!--                android:id="@+id/new_password_input"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:inputType="textPassword"-->
+<!--                android:hint="new password..." />-->
+<!--            <Button-->
+<!--                android:id="@+id/submit_password_edit_button"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:text="@string/submit_button"-->
+<!--                android:layout_gravity="end"/>-->
+
+<!--        </LinearLayout>-->
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <EditText
-                android:id="@+id/new_password_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="new password..." />
-            <Button
-                android:id="@+id/submit_password_edit_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/submit_button"
-                android:layout_gravity="end"/>
-        </LinearLayout>
-        <Button
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
             android:id="@+id/logout_button"
-            android:backgroundTint="@color/red"
+            android:textColor="@color/red"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/logout"
-            android:layout_margin="0dp"/>
-        <Button
+            android:layout_margin="0dp"
+            android:textSize="20sp"
+            android:paddingVertical="10dp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
             android:id="@+id/delete_account_button"
-            android:backgroundTint="@color/red"
+            android:textColor="@color/red"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/delete_account"
-            android:layout_margin="0dp"/>
+            android:layout_margin="0dp"
+            android:textSize="20sp"
+            android:paddingVertical="10dp"
+            android:clickable="true"
+            android:focusable="true"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
