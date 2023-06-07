@@ -24,14 +24,16 @@
             android:text="@string/username"
             android:textColor="?colorOnSecondary"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Username"
             android:textColor="?colorOnSecondary"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
     <LinearLayout
@@ -51,14 +53,16 @@
             android:text="@string/nickname"
             android:textColor="?colorOnSecondary"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="nickname"
             android:textColor="?colorOnSecondary"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
     <LinearLayout
@@ -79,28 +83,6 @@
             android:paddingVertical="10dp"
             android:text="@string/password_edit_button"
             android:textSize="20sp" />
-
-<!--        <LinearLayout-->
-<!--            android:id="@+id/password_edit_field"-->
-<!--            android:visibility="gone"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical">-->
-<!--            <EditText-->
-<!--                android:id="@+id/new_password_input"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:inputType="textPassword"-->
-<!--                android:hint="new password..." />-->
-<!--            <Button-->
-<!--                android:id="@+id/submit_password_edit_button"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:text="@string/submit_button"-->
-<!--                android:layout_gravity="end"/>-->
-
-<!--        </LinearLayout>-->
 
         <View
             android:layout_width="match_parent"
