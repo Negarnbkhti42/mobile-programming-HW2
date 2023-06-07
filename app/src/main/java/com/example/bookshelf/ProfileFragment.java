@@ -1,9 +1,15 @@
 package com.example.bookshelf;
 
+import android.content.Intent;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,10 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 public class ProfileFragment extends Fragment {
+
 
     public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();
@@ -38,28 +47,24 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button editPasswordButton = (Button) view.findViewById(R.id.edit_password_button);
-        Button submitPasswordEdit = (Button) view.findViewById(R.id.submit_password_edit_button);
-
-        EditText newPasswordInput = (EditText) view.findViewById(R.id.new_password_input);
-
-        LinearLayout editPasswordField = (LinearLayout) view.findViewById(R.id.password_edit_field);
+        TextView editPasswordButton = (TextView) view.findViewById(R.id.edit_password_button);
+        ImageButton settingButton = (ImageButton) view.findViewById(R.id.btn_view_settings);
 
         editPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editPasswordField.setVisibility(View.VISIBLE);
-                editPasswordButton.setVisibility(View.GONE);
+                PasswordChangeDialog passwordChangeDialog = new PasswordChangeDialog();
+                passwordChangeDialog.show(getChildFragmentManager(), "password change dialog");
             }
         });
 
-        submitPasswordEdit.setOnClickListener(new View.OnClickListener() {
+        settingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                newPasswordInput.setText("");
-                editPasswordField.setVisibility(View.GONE);
-                editPasswordButton.setVisibility(View.VISIBLE);
+                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                getActivity().startActivity(intent);
             }
         });
     }
+
 }

@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements PasswordChangeDialog.PasswordChangeDialogListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +59,12 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+    }
+
+    @Override
+    public void onDialogPositiveClick(String newPassword) {
+        System.out.println(newPassword);
 
     }
 }
