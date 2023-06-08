@@ -19,6 +19,7 @@
     <string name="signup_tab">signup</string>
     <string name="login_tab">login</string>
     <string name="settings">settings</string>
+    <string name="search">search</string>
     <string name="theme">theme</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
