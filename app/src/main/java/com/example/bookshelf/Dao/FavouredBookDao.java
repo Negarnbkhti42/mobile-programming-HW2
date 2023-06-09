@@ -1,5 +1,6 @@
 package com.example.bookshelf.Dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -16,7 +17,7 @@ public interface FavouredBookDao {
     void insert(FavouredBook favouredBook);
 
     @Query("Select * from favouredbook where username = :username")
-    List<FavouredBook> find(String username);
+    LiveData<List<FavouredBook>> find(String username);
 
     @Delete
     void delete(FavouredBook favouredBook);
