@@ -18,6 +18,7 @@
     <string name="delete_account">delete account</string>
     <string name="signup_tab">signup</string>
     <string name="login_tab">login</string>
+    <string name="remember_me">Remember me!</string>
     <string name="settings">settings</string>
     <string name="search">search</string>
 

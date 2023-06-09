@@ -43,12 +43,19 @@
             android:autofillHints="password"
             android:hint="@string/password"/>
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/remember_me"
+            android:text="@string/remember_me"/>
+
         <Button
             android:id="@+id/login_button"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:padding="8dp"
             android:textSize="18sp"
             android:text="@string/login_tab"/>
