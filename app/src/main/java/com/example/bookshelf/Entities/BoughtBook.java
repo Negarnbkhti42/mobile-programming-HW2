@@ -10,16 +10,19 @@ import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Entity
 @Data
+@Entity
 @AllArgsConstructor
-public class User implements Serializable {
-    @PrimaryKey
-    @NonNull
-    private String nickname;
-    @ColumnInfo(name = "username")
-    private String username;
+public class BoughtBook implements Serializable {
 
-    @ColumnInfo(name = "password")
-    private String password;
+    @PrimaryKey(autoGenerate = true)
+    private Integer id;
+
+    @NonNull
+    @ColumnInfo(name = "book_id")
+    private Integer bookId;
+
+    @NonNull
+    @ColumnInfo(name = "nickname")
+    private String nickName;
 }

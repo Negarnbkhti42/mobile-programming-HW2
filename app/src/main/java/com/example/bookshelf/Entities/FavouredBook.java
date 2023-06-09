@@ -11,15 +11,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
-@Data
 @AllArgsConstructor
-public class User implements Serializable {
-    @PrimaryKey
-    @NonNull
-    private String nickname;
-    @ColumnInfo(name = "username")
-    private String username;
+@Data
+public class FavouredBook implements Serializable {
+    @PrimaryKey(autoGenerate = true)
+    private Integer id;
 
-    @ColumnInfo(name = "password")
-    private String password;
+    @NonNull
+    @ColumnInfo(name = "book_id")
+    private Integer bookId;
+
+    @NonNull
+    @ColumnInfo(name = "nickname")
+    private String nickName;
 }

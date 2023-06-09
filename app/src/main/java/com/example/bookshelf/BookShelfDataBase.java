@@ -7,10 +7,12 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.bookshelf.Dao.UserDao;
+import com.example.bookshelf.Entities.BoughtBook;
 import com.example.bookshelf.Entities.Comment;
+import com.example.bookshelf.Entities.FavouredBook;
 import com.example.bookshelf.Entities.User;
 
-@Database(entities = {User.class, Comment.class}, version = 1)
+@Database(entities = {User.class, Comment.class, FavouredBook.class, BoughtBook.class}, version = 1)
 public abstract class BookShelfDataBase extends RoomDatabase {
     private static volatile BookShelfDataBase INSTANCE;
 
