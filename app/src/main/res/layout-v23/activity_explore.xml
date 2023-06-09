@@ -19,11 +19,11 @@
             android:padding="8dp"
             android:layout_margin="16dp"
             android:drawableStart="@drawable/round_search_24"
+            android:drawableTint="@color/brown_700"
             android:hint="@string/search"/>
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/book_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/search_container">
