@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
+import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -21,7 +23,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        System.out.println(sharedPreferences.getString("theme", "not found"));
+        Toast.makeText(this, sharedPreferences.getString("theme", "not found"), Toast.LENGTH_LONG).show();
         if (s.equals("theme")) {
             String theme = sharedPreferences.getString("theme", "light");
 
@@ -31,5 +33,19 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getPreferences(MODE_PRIVATE)
+                .registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        getPreferences(MODE_PRIVATE)
+                .unregisterOnSharedPreferenceChangeListener(this);
     }
 }

@@ -12,19 +12,23 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.Arrays;
+
 public class HomeActivity extends AppCompatActivity implements PasswordChangeDialog.PasswordChangeDialogListener {
+
+    private final HomeFragment homeFragment = HomeFragment.newInstance();
+    private final FavoriteFragment favoriteFragment = FavoriteFragment.newInstance();
+    private final CartFragment cartFragment = CartFragment.newInstance();
+    private final ProfileFragment profileFragment = ProfileFragment.newInstance();
+    private final FragmentManager fragmentManager = getSupportFragmentManager();
+    private Fragment selectedFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        final HomeFragment homeFragment = HomeFragment.newInstance();
-        final FavoriteFragment favoriteFragment = FavoriteFragment.newInstance();
-        final CartFragment cartFragment = CartFragment.newInstance();
-        final ProfileFragment profileFragment = ProfileFragment.newInstance();
-        final FragmentManager fragmentManager = getSupportFragmentManager();
-        final Fragment[] selectedFragment = {homeFragment};
+        selectedFragment = homeFragment;
 
         fragmentManager.beginTransaction().add(R.id.home_layout, favoriteFragment, "favorite").hide(favoriteFragment).commit();
         fragmentManager.beginTransaction().add(R.id.home_layout, cartFragment, "cart").hide(cartFragment).commit();
@@ -37,22 +41,24 @@ public class HomeActivity extends AppCompatActivity implements PasswordChangeDia
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                System.out.println(Arrays.toString(fragmentManager.getFragments().toArray()));
                 int itemId = item.getItemId();
+                System.out.println(selectedFragment);
                 if (itemId == R.id.action_home) {
-                    fragmentManager.beginTransaction().hide(selectedFragment[0]).show(homeFragment).commit();
-                    selectedFragment[0] = homeFragment;
+                    fragmentManager.beginTransaction().hide(selectedFragment).show(homeFragment).commit();
+                    selectedFragment = homeFragment;
                     return true;
                 } else if (itemId == R.id.action_cart) {
-                    fragmentManager.beginTransaction().hide(selectedFragment[0]).show(cartFragment).commit();
-                    selectedFragment[0] = cartFragment;
+                    fragmentManager.beginTransaction().hide(selectedFragment).show(cartFragment).commit();
+                    selectedFragment = cartFragment;
                     return true;
                 } else if (itemId == R.id.action_favorite) {
-                    fragmentManager.beginTransaction().hide(selectedFragment[0]).show(favoriteFragment).commit();
-                    selectedFragment[0] = favoriteFragment;
+                    fragmentManager.beginTransaction().hide(selectedFragment).show(favoriteFragment).commit();
+                    selectedFragment = favoriteFragment;
                     return true;
                 } else if (itemId == R.id.action_profile) {
-                    fragmentManager.beginTransaction().hide(selectedFragment[0]).show(profileFragment).commit();
-                    selectedFragment[0] = profileFragment;
+                    fragmentManager.beginTransaction().hide(selectedFragment).show(profileFragment).commit();
+                    selectedFragment = profileFragment;
                     return true;
                 }
 
@@ -61,6 +67,7 @@ public class HomeActivity extends AppCompatActivity implements PasswordChangeDia
         });
 
     }
+
 
     @Override
     public void onDialogPositiveClick(String newPassword) {
