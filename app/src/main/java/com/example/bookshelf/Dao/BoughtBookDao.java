@@ -13,6 +13,6 @@ public interface BoughtBookDao {
     @Insert
     void insert(BoughtBook boughtBook);
 
-    @Query("Select * from boughtbook where nickname = :nickname")
-    List<BoughtBook> find(String nickname);
+    @Query("Select * from boughtbook where username = :username")
+    List<BoughtBook> find(String username);
 }

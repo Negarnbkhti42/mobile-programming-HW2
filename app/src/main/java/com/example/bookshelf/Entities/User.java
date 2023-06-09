@@ -16,9 +16,9 @@ import lombok.Data;
 public class User implements Serializable {
     @PrimaryKey
     @NonNull
-    private String nickname;
-    @ColumnInfo(name = "username")
     private String username;
+    @ColumnInfo(name = "nickname")
+    private String nickname;
 
     @ColumnInfo(name = "password")
     private String password;

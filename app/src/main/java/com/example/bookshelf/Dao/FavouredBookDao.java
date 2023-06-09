@@ -15,8 +15,8 @@ public interface FavouredBookDao {
     @Insert
     void insert(FavouredBook favouredBook);
 
-    @Query("Select * from favouredbook where nickname = :nickname")
-    List<FavouredBook> find(String nickname);
+    @Query("Select * from favouredbook where username = :username")
+    List<FavouredBook> find(String username);
 
     @Delete
     void delete(FavouredBook favouredBook);

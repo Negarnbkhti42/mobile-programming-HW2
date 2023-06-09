@@ -22,6 +22,6 @@ public class FavouredBook implements Serializable {
     private Integer bookId;
 
     @NonNull
-    @ColumnInfo(name = "nickname")
-    private String nickName;
+    @ColumnInfo(name = "username")
+    private String username;
 }
