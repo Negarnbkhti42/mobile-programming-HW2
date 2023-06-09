@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 public class HomeFragment extends Fragment {
@@ -42,6 +43,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), BookInfoActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        ImageButton exploreButton = (ImageButton) view.findViewById(R.id.btn_view_search);
+        exploreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ExploreActivity.class);
                 getActivity().startActivity(intent);
             }
         });
