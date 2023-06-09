@@ -2,6 +2,7 @@ package com.example.bookshelf;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.PreferenceManager;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,10 +11,13 @@ import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -23,14 +27,19 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        Toast.makeText(this, sharedPreferences.getString("theme", "not found"), Toast.LENGTH_LONG).show();
         if (s.equals("theme")) {
-            String theme = sharedPreferences.getString("theme", "light");
+            String selectedTheme = sharedPreferences.getString("theme", "system");
 
-            if (theme.equals("dark")) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            } else if (theme.equals("light")) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            switch (selectedTheme) {
+                case "system":
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                    break;
+                case "light":
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    break;
+                case "dark":
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    break;
             }
         }
     }
@@ -38,14 +47,12 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
     @Override
     protected void onResume() {
         super.onResume();
-        getPreferences(MODE_PRIVATE)
-                .registerOnSharedPreferenceChangeListener(this);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        getPreferences(MODE_PRIVATE)
-                .unregisterOnSharedPreferenceChangeListener(this);
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
     }
 }

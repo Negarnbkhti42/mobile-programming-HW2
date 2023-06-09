@@ -3,12 +3,14 @@ package com.example.bookshelf;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.PreferenceManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -22,13 +24,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-        String theme = prefs.getString("theme", "light");
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String themeValue = prefs.getString("theme", "system");
 
-        if (theme.equals("dark")) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else if (theme.equals("light")) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        Toast.makeText(this, themeValue, Toast.LENGTH_SHORT).show();
+
+        switch (themeValue) {
+            case "system":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
+            case "light":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+            case "dark":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
         }
 
         tabLayout = findViewById(R.id.register_tab);
