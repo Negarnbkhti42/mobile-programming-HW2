@@ -18,4 +18,28 @@
     <string name="delete_account">delete account</string>
     <string name="signup_tab">signup</string>
     <string name="login_tab">login</string>
+    <string name="remember_me">Remember me!</string>
+    <string name="settings">settings</string>
+    <string name="search">search</string>
+
+    <string name="required">*</string>
+
+    <!-- purchase -->
+    <string name="address">Address</string>
+    <string name="address_hint">enter your address…</string>
+    <string name="arrival_date">Arrival Date</string>
+    <string name="pick_date">pick arrival date</string>
+
+    <!-- settings -->
+    <string name="theme">theme</string>
+
+    <!-- book sample -->
+    <string name="description_header">Description</string>
+    <string name="comments_header">Comments</string>
+    <string name="buy_book">Add to cart</string>
+    <string name="book_sample_title">crime and punishment</string>
+    <string name="book_sample_author">By Fyodor Dostoevsky</string>
+    <string name="book_sample_price">$25.00</string>
+    <string name="book_sample_rate">4.26</string>
+    <string name="book_sample_description">Raskolnikov, a destitute and desperate former student, wanders through the slums of St Petersburg and commits a random murder without remorse or regret. He imagines himself to be a great man, a Napoleon: acting for a higher purpose beyond conventional moral law. But as he embarks on a dangerous game of cat and mouse with a suspicious police investigator, Raskolnikov is pursued by the growing voice of his conscience and finds the noose of his own guilt tightening around his neck. Only Sonya, a downtrodden sex worker, can offer the chance of redemption.</string>
 </resources>

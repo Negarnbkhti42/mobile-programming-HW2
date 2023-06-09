@@ -12,6 +12,12 @@
         android:layout_marginTop="20dp"
         android:padding="20dp">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:src="@drawable/bookshelf_low_resolution_logo"
+            android:contentDescription="@string/app_name"/>
+
 
         <EditText
             android:id="@+id/signup_username"
