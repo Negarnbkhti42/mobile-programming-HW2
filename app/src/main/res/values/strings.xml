@@ -22,8 +22,18 @@
     <string name="settings">settings</string>
     <string name="search">search</string>
 
+    <string name="required">*</string>
+
+    <!-- purchase -->
+    <string name="address">Address</string>
+    <string name="address_hint">enter your address…</string>
+    <string name="arrival_date">Arrival Date</string>
+    <string name="pick_date">pick arrival date</string>
+
+    <!-- settings -->
     <string name="theme">theme</string>
 
+    <!-- book sample -->
     <string name="description_header">Description</string>
     <string name="comments_header">Comments</string>
     <string name="buy_book">Add to cart</string>

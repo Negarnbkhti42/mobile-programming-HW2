@@ -33,8 +33,8 @@
                     android:layout_width="200dp"
                     android:layout_height="300dp"
                     android:layout_gravity="center"
-                    app:shapeAppearanceOverlay="@style/RoundedSquare"
-                    android:src="@drawable/sample_book_cover"/>
+                    android:src="@drawable/sample_book_cover"
+                    app:shapeAppearanceOverlay="@style/RoundedSquare" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -56,9 +56,10 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center">
+                    android:orientation="horizontal">
+
                     <ImageView
                         android:id="@+id/imageView3"
                         android:layout_width="0dp"
@@ -111,6 +112,7 @@
                 android:textColor="?colorOnSecondary" />
 
             <Button
+                android:id="@+id/buy_book_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -146,6 +148,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <View
                         android:id="@+id/divider"
                         android:layout_width="match_parent"
