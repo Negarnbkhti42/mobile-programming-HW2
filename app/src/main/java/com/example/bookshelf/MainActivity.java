@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String themeValue = prefs.getString("theme", "system");
 
-        Toast.makeText(this, themeValue, Toast.LENGTH_SHORT).show();
-
         switch (themeValue) {
             case "system":
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);

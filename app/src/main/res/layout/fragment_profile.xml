@@ -44,7 +44,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/username"
-            android:textColor="?colorOnSecondary"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -53,7 +52,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Username"
-            android:textColor="?colorOnSecondary"
             android:textSize="15sp" />
     </LinearLayout>
 
@@ -73,7 +71,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/nickname"
-            android:textColor="?colorOnSecondary"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -82,7 +79,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="nickname"
-            android:textColor="?colorOnSecondary"
             android:textSize="15sp" />
     </LinearLayout>
 
