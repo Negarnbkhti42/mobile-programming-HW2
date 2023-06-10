@@ -1,5 +1,6 @@
 package com.example.bookshelf.Entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -19,6 +20,7 @@ public class Comment implements Serializable {
     @ColumnInfo(name = "text")
     private String text;
 
+    @NonNull
     @ColumnInfo(name = "rate")
     private Double rate;
 
@@ -26,5 +28,7 @@ public class Comment implements Serializable {
     private String nickname;
 
     @ColumnInfo(name = "book_id")
-    private Integer bookId;
+    private String bookId;
+
+
 }

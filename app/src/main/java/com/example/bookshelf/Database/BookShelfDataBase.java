@@ -1,4 +1,4 @@
-package com.example.bookshelf;
+package com.example.bookshelf.Database;
 
 import android.content.Context;
 
@@ -6,6 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.bookshelf.Dao.CommentDao;
 import com.example.bookshelf.Dao.UserDao;
 import com.example.bookshelf.Entities.BoughtBook;
 import com.example.bookshelf.Entities.Comment;
@@ -17,6 +18,8 @@ public abstract class BookShelfDataBase extends RoomDatabase {
     private static volatile BookShelfDataBase INSTANCE;
 
     public abstract UserDao userDao();
+
+    public abstract CommentDao commentDao();
 
     public static BookShelfDataBase getDatabase(final Context context) {
         if (INSTANCE == null) {
