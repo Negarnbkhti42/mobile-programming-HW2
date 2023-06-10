@@ -20,7 +20,7 @@ public class BoughtBook implements Serializable {
 
     @NonNull
     @ColumnInfo(name = "book_id")
-    private Integer bookId;
+    private String bookId;
 
     @NonNull
     @ColumnInfo(name = "username")
