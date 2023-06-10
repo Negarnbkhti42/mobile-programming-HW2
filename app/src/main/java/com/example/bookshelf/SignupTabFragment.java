@@ -15,13 +15,15 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.bookshelf.Dao.UserDao;
+import com.example.bookshelf.Database.BookShelfDataBase;
+import com.example.bookshelf.Entities.User;
 import com.example.bookshelf.services.SessionManager;
 
 public class SignupTabFragment extends Fragment {
 
     private Activity activity;
     private SessionManager sessionManager;
-    private UserDao userDao;
+    private BookShelfDataBase dataBase;
 
     private EditText username;
     private EditText nickname;
@@ -42,6 +44,7 @@ public class SignupTabFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         activity = getActivity();
+        dataBase = BookShelfDataBase.getDatabase(activity);
         sessionManager = new SessionManager(activity);
 
 
@@ -55,12 +58,7 @@ public class SignupTabFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (signupISValid()) {
-                    String usernameText = username.getText().toString();
-                    sessionManager.createSession(usernameText, false);
-
-                    Intent intent = new Intent(activity, HomeActivity.class);
-                    startActivity(intent);
-                    activity.finish();
+                    handleSignUp();
                 }
             }
         });
@@ -115,5 +113,26 @@ public class SignupTabFragment extends Fragment {
         }
 
         return true;
+    }
+
+    private void handleSignUp() {
+        String usernameText = username.getText().toString();
+        String nicknameText = nickname.getText().toString();
+        String passwordText = password.getText().toString();
+
+        User user = new User(usernameText, nicknameText, passwordText);
+
+        try {
+            dataBase.userDao().insert(user);
+
+            sessionManager.createSession(usernameText, false);
+
+            Intent intent = new Intent(activity, HomeActivity.class);
+            startActivity(intent);
+            activity.finish();
+        } catch (Exception e) {
+            username.setError("Username already exists");
+            username.requestFocus();
+        }
     }
 }

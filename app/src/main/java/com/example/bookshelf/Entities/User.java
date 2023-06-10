@@ -3,6 +3,7 @@ package com.example.bookshelf.Entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -16,7 +17,9 @@ import lombok.Data;
 public class User implements Serializable {
     @PrimaryKey
     @NonNull
+    @ColumnInfo(name = "username")
     private String username;
+
     @ColumnInfo(name = "nickname")
     private String nickname;
 
