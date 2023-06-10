@@ -2,18 +2,18 @@
     <!-- Base application theme. -->
     <style name="Theme.Bookshelf" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/green_300</item>
-        <item name="colorPrimaryVariant">@color/green_200</item>
-        <item name="colorPrimaryContainer">@color/green_800</item>
+        <item name="colorPrimary">@color/green_700</item>
+        <item name="colorPrimaryVariant">@color/green_500</item>
+        <item name="colorPrimaryContainer">@color/green_500</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnPrimaryContainer">@color/white</item>
-
-        <item name="colorSecondary">@color/brown_300</item>
-        <item name="colorSecondaryVariant">@color/brown_200</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/brown_500</item>
+        <item name="colorSecondaryVariant">@color/brown_700</item>
         <item name="colorOnSecondary">@color/white</item>
-
-        <item name="android:statusBarColor">?attr/colorPrimaryContainer</item>
-
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
         <item name="colorOnBackground">@color/white</item>
         <item name="editTextBackground">@color/grey_darker</item>
     </style>

@@ -20,7 +20,7 @@
 
 
         <EditText
-            android:id="@+id/signupUsername"
+            android:id="@+id/login_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_background"
@@ -32,7 +32,7 @@
             android:hint="@string/username" />
 
         <EditText
-            android:id="@+id/signupPassword"
+            android:id="@+id/login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_background"
@@ -44,6 +44,7 @@
             android:hint="@string/password"/>
 
         <CheckBox
+            android:id="@+id/login_remember"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

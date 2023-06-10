@@ -1,5 +1,6 @@
 package com.example.bookshelf.Dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -18,7 +19,7 @@ public interface UserDao {
     void insert(User user);
 
     @Query("SELECT * FROM User WHERE username = :username AND password = :password")
-    User findUser(String username, String password);
+    LiveData<User> findUser(String username, String password);
 
     @Update
     void update(User user);

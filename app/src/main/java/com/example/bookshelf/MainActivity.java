@@ -4,15 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceManager;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.bookshelf.Database.BookRepository;
+import com.example.bookshelf.services.SessionManager;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +38,17 @@ public class MainActivity extends AppCompatActivity {
             case "dark":
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 break;
+        }
+
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
+
+        // Check if the user is already logged in
+        if (sessionManager.isLoggedIn()) {
+            String userId = sessionManager.getUserId();
+            String authToken = sessionManager.getAuthToken();
+
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
         }
 
         tabLayout = findViewById(R.id.register_tab);
