@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.bookshelf.databinding.ActivityHomeBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -20,68 +21,57 @@ public class HomeActivity extends AppCompatActivity implements PasswordChangeDia
     private final FavoriteFragment favoriteFragment = FavoriteFragment.newInstance();
     private final CartFragment cartFragment = CartFragment.newInstance();
     private final ProfileFragment profileFragment = ProfileFragment.newInstance();
-    private final FragmentManager fragmentManager = getSupportFragmentManager();
-    private Fragment selectedFragment;
+    private String lastFragment;
 
-    private static final String SELECTED_FRAGMENT_TAG_KEY = "selected_fragment_tag";
-    private String selectedFragmentTag;
+    private final String HOME_FRAGMENT_KEY = "home";
+    private final String FAVORITE_FRAGMENT_KEY = "favorite";
+    private final String CART_FRAGMENT_KEY = "cart";
+    private final String PROFILE_FRAGMENT_KEY = "profile";
+    private final String LAST_FRAGMENT_KEY = "lastFragment";
+
+    ActivityHomeBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
+        lastFragment = savedInstanceState == null ? HOME_FRAGMENT_KEY : savedInstanceState.getString(LAST_FRAGMENT_KEY, HOME_FRAGMENT_KEY);
+        Fragment firstDisplayFragment = homeFragment;
 
-        if (savedInstanceState == null) {
-            // Only add the fragments if this is the initial creation of the activity
-            selectedFragment = homeFragment;
-            selectedFragmentTag = "home";
-
-            fragmentManager.beginTransaction().add(R.id.home_layout, favoriteFragment, "favorite").hide(favoriteFragment).commit();
-            fragmentManager.beginTransaction().add(R.id.home_layout, cartFragment, "cart").hide(cartFragment).commit();
-            fragmentManager.beginTransaction().add(R.id.home_layout, profileFragment, "profile").hide(profileFragment).commit();
-            fragmentManager.beginTransaction().add(R.id.home_layout, homeFragment, "home").commit();
-        } else {
-            // If the activity is being recreated, retrieve the selected fragment tag from the saved state
-            selectedFragmentTag = savedInstanceState.getString(SELECTED_FRAGMENT_TAG_KEY);
-
-            // Retrieve the selected fragment from the fragment manager using the tag
-            selectedFragment = fragmentManager.findFragmentByTag(selectedFragmentTag);
+        switch (lastFragment) {
+            case "cart":
+                firstDisplayFragment = cartFragment;
+                break;
+            case "favorite":
+                firstDisplayFragment = favoriteFragment;
+                break;
+            case "profile":
+                firstDisplayFragment = profileFragment;
+                break;
         }
 
+        replaceFragment(firstDisplayFragment, lastFragment);
+//        binding.navigation.setBackground(null);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
-
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                System.out.println(Arrays.toString(fragmentManager.getFragments().toArray()));
-                int itemId = item.getItemId();
-                if (itemId == R.id.action_home) {
-                    fragmentManager.beginTransaction().hide(selectedFragment).show(homeFragment).commit();
-                    selectedFragment = homeFragment;
-                    selectedFragmentTag = "home";
-                    return true;
-                } else if (itemId == R.id.action_cart) {
-                    fragmentManager.beginTransaction().hide(selectedFragment).show(cartFragment).commit();
-                    selectedFragment = cartFragment;
-                    selectedFragmentTag = "cart";
-                    return true;
-                } else if (itemId == R.id.action_favorite) {
-                    fragmentManager.beginTransaction().hide(selectedFragment).show(favoriteFragment).commit();
-                    selectedFragment = favoriteFragment;
-                    selectedFragmentTag = "favorite";
-                    return true;
-                } else if (itemId == R.id.action_profile) {
-                    fragmentManager.beginTransaction().hide(selectedFragment).show(profileFragment).commit();
-                    selectedFragment = profileFragment;
-                    selectedFragmentTag = "profile";
-                    return true;
-                }
-
-                System.out.println(selectedFragment);
-                return false;
+        binding.navigation.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.action_home:
+                    replaceFragment(homeFragment, HOME_FRAGMENT_KEY);
+                    break;
+                case R.id.action_cart:
+                    replaceFragment(cartFragment, CART_FRAGMENT_KEY);
+                    break;
+                case R.id.action_favorite:
+                    replaceFragment(favoriteFragment, FAVORITE_FRAGMENT_KEY);
+                    break;
+                case R.id.action_profile:
+                    replaceFragment(profileFragment, PROFILE_FRAGMENT_KEY);
+                    break;
             }
+            return true;
         });
 
     }
@@ -94,9 +84,16 @@ public class HomeActivity extends AppCompatActivity implements PasswordChangeDia
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        // Save the selected fragment's tag in the saved state
-        outState.putString(SELECTED_FRAGMENT_TAG_KEY, selectedFragmentTag);
+        outState.putString(LAST_FRAGMENT_KEY, lastFragment);
+    }
+
+    private void replaceFragment(Fragment fragment, String tag) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.home_layout, fragment, tag);
+        lastFragment = tag;
+        fragmentTransaction.commit();
     }
 }
