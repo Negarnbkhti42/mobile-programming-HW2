@@ -6,6 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.bookshelf.Dao.FavouredBookDao;
 import com.example.bookshelf.Dao.UserDao;
 import com.example.bookshelf.Entities.BoughtBook;
 import com.example.bookshelf.Entities.Comment;
@@ -17,17 +18,18 @@ public abstract class BookShelfDataBase extends RoomDatabase {
     private static volatile BookShelfDataBase INSTANCE;
 
     public abstract UserDao userDao();
+    public abstract FavouredBookDao favouredBookDao();
 
-    public static BookShelfDataBase getDatabase(final Context context) {
+    public static synchronized BookShelfDataBase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (BookShelfDataBase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(
                                     context.getApplicationContext(),
-                                    BookShelfDataBase.class, "word_database")
+                                    BookShelfDataBase.class, "user_database")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
-            }
+
         }
         return INSTANCE;
     }

@@ -41,6 +41,17 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
+
+        // Check if the user is already logged in
+        if (sessionManager.isLoggedIn()) {
+            String userId = sessionManager.getUserId();
+            String authToken = sessionManager.getAuthToken();
+
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        }
+
         tabLayout = findViewById(R.id.register_tab);
         viewPager2 = findViewById(R.id.view_pager);
 

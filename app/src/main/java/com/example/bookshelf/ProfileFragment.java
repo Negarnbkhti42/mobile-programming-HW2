@@ -1,5 +1,6 @@
 package com.example.bookshelf;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,8 @@ import android.widget.TextView;
 
 
 public class ProfileFragment extends Fragment {
+
+    private SessionManager sessionManager;
 
 
     public static ProfileFragment newInstance() {
@@ -47,8 +51,14 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Activity activity = getActivity();
+        this.sessionManager = new SessionManager(activity);
+
         TextView editPasswordButton = (TextView) view.findViewById(R.id.edit_password_button);
         ImageButton settingButton = (ImageButton) view.findViewById(R.id.btn_view_settings);
+
+        TextView logoutButton = (TextView) view.findViewById(R.id.logout_button);
+        TextView deleteAccountButton = (TextView) view.findViewById(R.id.delete_account_button);
 
         editPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,8 +71,26 @@ public class ProfileFragment extends Fragment {
         settingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                getActivity().startActivity(intent);
+                Intent intent = new Intent(activity, SettingsActivity.class);
+                activity.startActivity(intent);
+            }
+        });
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sessionManager.clearSession();
+                activity.startActivity(new Intent(activity, MainActivity.class));
+                activity.finish();
+            }
+        });
+
+        deleteAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sessionManager.clearSession();
+                activity.startActivity(new Intent(activity, MainActivity.class));
+                activity.finish();
             }
         });
     }

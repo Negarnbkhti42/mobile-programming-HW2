@@ -18,11 +18,11 @@ import android.widget.EditText;
 public class LoginTabFragment extends Fragment {
 
     private Activity activity;
+    private SessionManager sessionManager;
 
     EditText username;
     EditText password;
     CheckBox rememberMe;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +36,7 @@ public class LoginTabFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         activity = getActivity();
+        this.sessionManager = new SessionManager(activity);
 
         username = (EditText) view.findViewById(R.id.login_username);
         password = (EditText) view.findViewById(R.id.login_password);
@@ -66,6 +67,8 @@ public class LoginTabFragment extends Fragment {
             password.requestFocus();
             return;
         }
+
+        sessionManager.createSession(usernameText);
 
         Intent intent = new Intent(activity, HomeActivity.class);
         startActivity(intent);

@@ -17,6 +17,7 @@ import android.widget.EditText;
 public class SignupTabFragment extends Fragment {
 
     private Activity activity;
+    private SessionManager sessionManager;
 
     private EditText username;
     private EditText nickname;
@@ -37,6 +38,7 @@ public class SignupTabFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         activity = getActivity();
+        sessionManager = new SessionManager(activity);
 
         username = (EditText) view.findViewById(R.id.signup_username);
         nickname = (EditText) view.findViewById(R.id.signup_nickname);
@@ -101,6 +103,7 @@ public class SignupTabFragment extends Fragment {
         }
 
 
+        sessionManager.createSession(usernameText);
 
         Intent intent = new Intent(activity, HomeActivity.class);
         startActivity(intent);
