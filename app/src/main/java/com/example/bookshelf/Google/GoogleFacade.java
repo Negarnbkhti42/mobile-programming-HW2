@@ -4,4 +4,6 @@ import java.util.List;
 
 public interface GoogleFacade {
     List<Book> searchBook(BookFilter filter);
+
+    Book findById(String Id);
 }

@@ -29,7 +29,7 @@ public class GoogleFacadeImpl implements GoogleFacade {
 
     }
 
-    private final String urlString = "https://www.googleapis.com/books/v1/volumes?q=";
+    private final String urlString = "https://www.googleapis.com/books/v1/volumes";
 
     @Override
     public List<Book> searchBook(BookFilter filter) {
@@ -69,6 +69,7 @@ public class GoogleFacadeImpl implements GoogleFacade {
         StringBuilder query = new StringBuilder();
         Boolean removePlus = Boolean.FALSE;
         query.append(urlString);
+        query.append("?q=");
         if (bookFilter.getAuthor() != null) {
             query.append(APIParameter.AUTHOR);
             query.append(bookFilter.getAuthor());
@@ -103,5 +104,36 @@ public class GoogleFacadeImpl implements GoogleFacade {
         }
         String url = volumeInfo.getJSONObject("imageLinks").getString("thumbnail");
         book.setImageThumbnail(new URL(url));
+    }
+
+    @Override
+    public Book findById(String Id) {
+        Book result;
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(getFindBookQuery(Id))
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            String json;
+            if (response.body() != null) {
+                json = response.body().string();
+            } else {
+                return null;
+            }
+            JSONObject jsonObject = new JSONObject(json);
+            result = new Book();
+            JSONObject volumeInfo = jsonObject.getJSONObject("volumeInfo");
+            fillAuthorAndTitleAndImage(result, volumeInfo);
+            result.setRate(getRating(jsonObject.getString("id")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+
+    private String getFindBookQuery(String bookId) {
+        return urlString +
+                "/" +
+                bookId;
     }
 }
