@@ -6,10 +6,15 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 @Entity
+@Data
+@AllArgsConstructor
 public class Comment implements Serializable {
     @PrimaryKey(autoGenerate = true)
-    private int commentId;
+    private int id;
 
     @ColumnInfo(name = "text")
     private String text;
@@ -17,27 +22,9 @@ public class Comment implements Serializable {
     @ColumnInfo(name = "rate")
     private Double rate;
 
-    public int getCommentId() {
-        return commentId;
-    }
+    @ColumnInfo(name = "nickname")
+    private String nickname;
 
-    public void setCommentId(int commentId) {
-        this.commentId = commentId;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Double getRate() {
-        return rate;
-    }
-
-    public void setRate(Double rate) {
-        this.rate = rate;
-    }
+    @ColumnInfo(name = "book_id")
+    private Integer bookId;
 }
