@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.example.bookshelf.Dao.UserDao;
+
 public class LoginTabFragment extends Fragment {
 
     private Activity activity;
@@ -46,12 +48,18 @@ public class LoginTabFragment extends Fragment {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handleLogin();
+                if (loginIsValid()) {
+                    String usernameText = username.getText().toString();
+                    sessionManager.createSession(usernameText);
+
+                    Intent intent = new Intent(activity, HomeActivity.class);
+                    startActivity(intent);
+                    activity.finish();                }
             }
         });
     }
 
-    private void handleLogin() {
+    private boolean loginIsValid() {
         String usernameText = username.getText().toString();
         String passwordText = password.getText().toString();
         boolean rememberMeChecked = rememberMe.isChecked();
@@ -59,20 +67,19 @@ public class LoginTabFragment extends Fragment {
         if (usernameText.isEmpty()) {
             username.setError("Username is required");
             username.requestFocus();
-            return;
+            return false;
         }
 
         if (passwordText.isEmpty()) {
             password.setError("password is required");
             password.requestFocus();
-            return;
+            return false;
         }
 
-        sessionManager.createSession(usernameText);
 
-        Intent intent = new Intent(activity, HomeActivity.class);
-        startActivity(intent);
-        activity.finish();
+
+        return  true;
 
     }
+
 }

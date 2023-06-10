@@ -14,10 +14,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.bookshelf.Dao.UserDao;
+
 public class SignupTabFragment extends Fragment {
 
     private Activity activity;
     private SessionManager sessionManager;
+    private UserDao userDao;
 
     private EditText username;
     private EditText nickname;
@@ -40,6 +43,7 @@ public class SignupTabFragment extends Fragment {
         activity = getActivity();
         sessionManager = new SessionManager(activity);
 
+
         username = (EditText) view.findViewById(R.id.signup_username);
         nickname = (EditText) view.findViewById(R.id.signup_nickname);
         password = (EditText) view.findViewById(R.id.signup_password);
@@ -49,12 +53,19 @@ public class SignupTabFragment extends Fragment {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handleSignup();
+                if (signupISValid()) {
+                    String usernameText = username.getText().toString();
+                    sessionManager.createSession(usernameText);
+
+                    Intent intent = new Intent(activity, HomeActivity.class);
+                    startActivity(intent);
+                    activity.finish();
+                }
             }
         });
     }
 
-    private void handleSignup() {
+    private boolean signupISValid() {
         String usernameText = username.getText().toString();
         String nicknameText = nickname.getText().toString();
         String passwordText = password.getText().toString();
@@ -63,50 +74,45 @@ public class SignupTabFragment extends Fragment {
         if (usernameText.isEmpty()) {
             username.setError("Username is required");
             username.requestFocus();
-            return;
+            return false;
         }
 
         if (usernameText.length() < 6 || usernameText.length() > 30) {
             username.setError("Username must be at least 6 characters and at most 30 characters");
             username.requestFocus();
-            return;
+            return false;
         }
 
         if (nicknameText.isEmpty()) {
             nickname.setError("Nickname is required");
             nickname.requestFocus();
-            return;
+            return false;
         }
 
         if (nicknameText.length() < 6 || nicknameText.length() > 30) {
             nickname.setError("Nickname must be at least 6 characters and at most 30 characters");
             nickname.requestFocus();
-            return;
+            return false;
         }
 
         if (passwordText.isEmpty()) {
             password.setError("Password is required");
             password.requestFocus();
-            return;
+            return false;
         }
 
         if (passwordText.length() < 6 || passwordText.length() > 30) {
             password.setError("Password must be at least 6 characters and at most 30 characters");
             password.requestFocus();
-            return;
+            return false;
         }
 
         if (!passwordText.equals(confirmPasswordText)) {
             confirmPassword.setError("Password and confirm password must be the same");
             confirmPassword.requestFocus();
-            return;
+            return false;
         }
 
-
-        sessionManager.createSession(usernameText);
-
-        Intent intent = new Intent(activity, HomeActivity.class);
-        startActivity(intent);
-        activity.finish();
+        return true;
     }
 }
