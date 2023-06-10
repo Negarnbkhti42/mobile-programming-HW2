@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.bookshelf.Database.BookRepository;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        BookRepository bookRepository = new BookRepository(getApplication());
+        BookRepository.setInstance(bookRepository);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String themeValue = prefs.getString("theme", "system");
 

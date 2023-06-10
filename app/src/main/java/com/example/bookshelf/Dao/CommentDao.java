@@ -15,4 +15,7 @@ public interface CommentDao {
 
     @Query("Select * from Comment where book_id = :bookId")
     List<Comment> findCommentsOfABook(Integer bookId);
+
+    @Query("SELECT SUM(rate) FROM Comment GROUP BY book_id having book_id = :bookId")
+    Double getRateAverage(String bookId);
 }
