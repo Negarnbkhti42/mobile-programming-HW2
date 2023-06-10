@@ -1,5 +1,6 @@
 package com.example.bookshelf.Google;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,16 @@ public class Book {
     private Double rate;
 
     private String id;
+
+    private URL imageThumbnail;
+
+    public URL getImageThumbnail() {
+        return imageThumbnail;
+    }
+
+    public void setImageThumbnail(URL imageThumbnail) {
+        this.imageThumbnail = imageThumbnail;
+    }
 
     public String getId() {
         return id;

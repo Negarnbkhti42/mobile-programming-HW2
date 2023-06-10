@@ -3,8 +3,11 @@ package com.example.bookshelf.Google;
 import com.example.bookshelf.Database.BookRepository;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,12 +51,9 @@ public class GoogleFacadeImpl implements GoogleFacade {
                 Book book = new Book();
                 JSONObject item = items.getJSONObject(i);
                 JSONObject volumeInfo = item.getJSONObject("volumeInfo");
-                book.setTitle(volumeInfo.getString("title"));
-                JSONArray authors = volumeInfo.getJSONArray("authors");
-                for (int j = 0; j < authors.length(); j++) {
-                    book.getAuthors().add(authors.getString(j));
-                }
+                fillAuthorAndTitleAndImage(book, volumeInfo);
                 book.setRate(getRating(item.getString("id")));
+                result.add(book);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -92,5 +92,16 @@ public class GoogleFacadeImpl implements GoogleFacade {
             query.deleteCharAt(query.length() - 1);
         }
         return query.toString();
+    }
+
+    private void fillAuthorAndTitleAndImage(Book book, JSONObject volumeInfo)
+            throws JSONException, MalformedURLException {
+        book.setTitle(volumeInfo.getString("title"));
+        JSONArray authors = volumeInfo.getJSONArray("authors");
+        for (int j = 0; j < authors.length(); j++) {
+            book.getAuthors().add(authors.getString(j));
+        }
+        String url = volumeInfo.getJSONObject("imageLinks").getString("thumbnail");
+        book.setImageThumbnail(new URL(url));
     }
 }
