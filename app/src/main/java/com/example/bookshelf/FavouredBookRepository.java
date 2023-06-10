@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.example.bookshelf.Dao.FavouredBookDao;
+import com.example.bookshelf.Database.BookShelfDataBase;
 import com.example.bookshelf.Entities.FavouredBook;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class FavouredBookRepository {
     public FavouredBookRepository(Application application) {
 
         BookShelfDataBase dataBase = BookShelfDataBase.getDatabase(application);
-        favouredBookDao = dataBase.favouredBookDao();
+//        favouredBookDao = dataBase.favouredBookDao();
         favouredBooks = favouredBookDao.find("hi");
     }
 

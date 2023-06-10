@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.example.bookshelf.Dao.UserDao;
+import com.example.bookshelf.services.SessionManager;
 
 public class LoginTabFragment extends Fragment {
 
@@ -50,7 +50,7 @@ public class LoginTabFragment extends Fragment {
             public void onClick(View view) {
                 if (loginIsValid()) {
                     String usernameText = username.getText().toString();
-                    sessionManager.createSession(usernameText);
+                    sessionManager.createSession(usernameText, rememberMe.isChecked());
 
                     Intent intent = new Intent(activity, HomeActivity.class);
                     startActivity(intent);

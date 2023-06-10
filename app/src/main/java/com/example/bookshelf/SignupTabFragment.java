@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.bookshelf.Dao.UserDao;
+import com.example.bookshelf.services.SessionManager;
 
 public class SignupTabFragment extends Fragment {
 
@@ -55,7 +56,7 @@ public class SignupTabFragment extends Fragment {
             public void onClick(View view) {
                 if (signupISValid()) {
                     String usernameText = username.getText().toString();
-                    sessionManager.createSession(usernameText);
+                    sessionManager.createSession(usernameText, false);
 
                     Intent intent = new Intent(activity, HomeActivity.class);
                     startActivity(intent);

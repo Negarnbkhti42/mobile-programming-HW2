@@ -33,6 +33,9 @@
     <!-- settings -->
     <string name="theme">theme</string>
 
+    <string name="cart_is_empty">your cart is empty!</string>
+    <string name="empty_favorite">your favorite list is empty!</string>
+
     <!-- book sample -->
     <string name="description_header">Description</string>
     <string name="comments_header">Comments</string>

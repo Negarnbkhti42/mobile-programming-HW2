@@ -12,13 +12,14 @@ import com.example.bookshelf.R;
 import com.example.bookshelf.viewholders.BookViewHolder;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class BookListAdaptor extends RecyclerView.Adapter<BookViewHolder>{
 
-    private LinkedList<String> bookList;
+    private List<String> bookList;
     private LayoutInflater bookInflater;
 
-    public BookListAdaptor(Context context, LinkedList<String> BookList) {
+    public BookListAdaptor(Context context, List<String> BookList) {
         bookInflater = LayoutInflater.from(context);
         this.bookList = BookList;
     }

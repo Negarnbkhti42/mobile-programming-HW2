@@ -8,18 +8,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bookshelf.Entities.Comment;
 import com.example.bookshelf.R;
-import com.example.bookshelf.viewholders.BookViewHolder;
 import com.example.bookshelf.viewholders.CommentViewHolder;
 
-import java.util.LinkedList;
+import java.util.List;
 
-public class CommnetListAdaptor extends RecyclerView.Adapter<CommentViewHolder>{
+public class CommentListAdaptor extends RecyclerView.Adapter<CommentViewHolder>{
 
     private LayoutInflater commentInflater;
-    private LinkedList<String> commentList;
+    private List<Comment> commentList;
 
-    public CommnetListAdaptor(Context context, LinkedList<String> commentList) {
+    public CommentListAdaptor(Context context, List<Comment> commentList) {
         this.commentInflater = LayoutInflater.from(context);
         this.commentList = commentList;
     }

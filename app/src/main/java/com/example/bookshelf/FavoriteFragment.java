@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 
 public class FavoriteFragment extends Fragment {
@@ -26,6 +27,11 @@ public class FavoriteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_favorite, container, false);
+        LayoutInflater inflater2 = LayoutInflater.from(getActivity());
+        View v = inflater2.inflate(R.layout.layout_empty_favorite_list, null);
+        ScrollView favoriteViewGroup = rootView.findViewById(R.id.favorite_fragment_view_group);
+        favoriteViewGroup.addView(v);
+        return rootView;
     }
 }
