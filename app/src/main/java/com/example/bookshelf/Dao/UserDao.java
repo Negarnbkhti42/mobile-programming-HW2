@@ -19,7 +19,7 @@ public interface UserDao {
     void insert(User user);
 
     @Query("SELECT * FROM User WHERE username = :username AND password = :password")
-    LiveData<User> findUser(String username, String password);
+    User findUser(String username, String password);
 
     @Update
     void update(User user);

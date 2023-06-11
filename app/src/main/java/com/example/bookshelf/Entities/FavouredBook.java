@@ -3,6 +3,7 @@ package com.example.bookshelf.Entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -24,4 +25,14 @@ public class FavouredBook implements Serializable {
     @NonNull
     @ColumnInfo(name = "username")
     private String username;
+
+    @NonNull
+    public String getUsername() {
+        return username;
+    }
+
+    @NonNull
+    public String getBookId() {
+        return bookId;
+    }
 }

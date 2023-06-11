@@ -20,7 +20,7 @@ public class ExploreActivity extends AppCompatActivity {
 
         bookRecyclerView = (RecyclerView) findViewById(R.id.book_recycler_view);
 
-        bookAdaptor = new BookListAdaptor(this, null);
+        bookAdaptor = new BookListAdaptor();
         bookRecyclerView.setAdapter(bookAdaptor);
 
         bookLayoutManager = new LinearLayoutManager(this);

@@ -33,8 +33,14 @@
     <!-- settings -->
     <string name="theme">theme</string>
 
+    <!-- empty messages -->
     <string name="cart_is_empty">your cart is empty!</string>
     <string name="empty_favorite">your favorite list is empty!</string>
+
+    <!-- book plceholders -->
+    <string name="book_placeholder_author">By %1$s</string>
+    <string name="book_placeholder_price">$%1$d</string>
+    <string name="book_placeholder_rate">%1$d</string>
 
     <!-- book sample -->
     <string name="description_header">Description</string>

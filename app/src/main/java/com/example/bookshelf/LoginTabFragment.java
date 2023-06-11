@@ -30,7 +30,6 @@ public class LoginTabFragment extends Fragment {
     private Activity activity;
     private SessionManager sessionManager;
     private BookShelfDataBase dataBase;
-    private UserViewModel userViewModel;
 
     EditText username;
     EditText password;
@@ -41,7 +40,7 @@ public class LoginTabFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         requireContext();
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        dataBase = BookShelfDataBase.getDatabase(activity);
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
@@ -96,21 +95,20 @@ public class LoginTabFragment extends Fragment {
         String usernameText = username.getText().toString();
         String passwordText = password.getText().toString();
 
-        userViewModel.getUserByUsername(usernameText, passwordText).observe(this, user -> {
-            if (user != null) {
-                // User found, perform login logic
-                sessionManager.createSession(usernameText, rememberMe.isChecked());
+        User user = dataBase.userDao().findUser(usernameText, passwordText);
 
-                Intent intent = new Intent(activity, HomeActivity.class);
-                startActivity(intent);
-                activity.finish();
-            } else {
-                // User not found, display error message
-                Toast.makeText(activity, "user with this username and password doesn't exist", Toast.LENGTH_SHORT).show();
+        if (user != null) {
+            // User found, perform login logic
+            sessionManager.createSession(usernameText, rememberMe.isChecked());
 
-            }
-        });
+            Intent intent = new Intent(activity, HomeActivity.class);
+            startActivity(intent);
+            activity.finish();
+        } else {
+            // User not found, display error message
+            Toast.makeText(activity, "user with this username and password doesn't exist", Toast.LENGTH_SHORT).show();
 
+        }
 
 
     }

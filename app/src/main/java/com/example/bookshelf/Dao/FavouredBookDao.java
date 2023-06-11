@@ -6,7 +6,6 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.bookshelf.Entities.BoughtBook;
 import com.example.bookshelf.Entities.FavouredBook;
 
 import java.util.List;
@@ -17,7 +16,10 @@ public interface FavouredBookDao {
     void insert(FavouredBook favouredBook);
 
     @Query("Select * from favouredbook where username = :username")
-    LiveData<List<FavouredBook>> find(String username);
+    LiveData<List<FavouredBook>> getUserFavoured(String username);
+
+    @Query("Select * from favouredbook where username = :username and book_id = :bookId")
+    FavouredBook find(String username, String bookId);
 
     @Delete
     void delete(FavouredBook favouredBook);
