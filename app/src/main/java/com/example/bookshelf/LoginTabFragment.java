@@ -7,8 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +19,6 @@ import android.widget.Toast;
 import com.example.bookshelf.Database.BookShelfDataBase;
 import com.example.bookshelf.Entities.User;
 import com.example.bookshelf.services.SessionManager;
-import com.example.bookshelf.viewmodels.UserViewModel;
-
-import java.time.Duration;
 
 public class LoginTabFragment extends Fragment {
 
@@ -95,20 +90,24 @@ public class LoginTabFragment extends Fragment {
         String usernameText = username.getText().toString();
         String passwordText = password.getText().toString();
 
-        User user = dataBase.userDao().findUser(usernameText, passwordText);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                User user = dataBase.userDao().findUser(usernameText, passwordText);
+                if (user != null) {
+                    // User found, perform login logic
+                    sessionManager.createSession(usernameText, rememberMe.isChecked());
 
-        if (user != null) {
-            // User found, perform login logic
-            sessionManager.createSession(usernameText, rememberMe.isChecked());
+                    Intent intent = new Intent(activity, HomeActivity.class);
+                    startActivity(intent);
+                    activity.finish();
+                } else {
+                    // User not found, display error message
+                    Toast.makeText(activity, "user with this username and password doesn't exist", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(activity, HomeActivity.class);
-            startActivity(intent);
-            activity.finish();
-        } else {
-            // User not found, display error message
-            Toast.makeText(activity, "user with this username and password doesn't exist", Toast.LENGTH_SHORT).show();
-
-        }
+                }
+            }
+        }).start();
 
 
     }

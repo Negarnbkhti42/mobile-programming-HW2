@@ -15,7 +15,7 @@ import com.example.bookshelf.Entities.Comment;
 import com.example.bookshelf.Entities.FavouredBook;
 import com.example.bookshelf.Entities.User;
 
-@Database(entities = {User.class, Comment.class, FavouredBook.class, BoughtBook.class}, version = 1)
+@Database(entities = {User.class, Comment.class, FavouredBook.class, BoughtBook.class}, version = 2)
 public abstract class BookShelfDataBase extends RoomDatabase {
     private static volatile BookShelfDataBase INSTANCE;
 
@@ -31,6 +31,7 @@ public abstract class BookShelfDataBase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(
                                     context.getApplicationContext(),
                                     BookShelfDataBase.class, "word_database")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.bookshelf.Dao.UserDao;
 import com.example.bookshelf.Database.BookShelfDataBase;
@@ -122,17 +123,26 @@ public class SignupTabFragment extends Fragment {
 
         User user = new User(usernameText, nicknameText, passwordText);
 
-        try {
-            dataBase.userDao().insert(user);
+        UserDao userDao = dataBase.userDao();
 
-            sessionManager.createSession(usernameText, false);
-
-            Intent intent = new Intent(activity, HomeActivity.class);
-            startActivity(intent);
-            activity.finish();
-        } catch (Exception e) {
-            username.setError("Username already exists");
-            username.requestFocus();
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                userDao.insert(user);
+                sessionManager.createSession(usernameText, false);
+                } catch (Exception e) {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            System.out.println(e.getMessage());
+                            username.setError("Username already exists");
+                            username.requestFocus();
+                        }
+                    });
+                }
+            }
+        }).start();
     }
 }
