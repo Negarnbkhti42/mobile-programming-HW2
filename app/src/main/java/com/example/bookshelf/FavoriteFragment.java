@@ -19,6 +19,7 @@ import com.example.bookshelf.Entities.FavouredBook;
 import com.example.bookshelf.Google.Book;
 import com.example.bookshelf.Google.GoogleFacadeImpl;
 import com.example.bookshelf.adaptors.BookListAdaptor;
+import com.example.bookshelf.models.BookOverview;
 import com.example.bookshelf.viewmodels.FavouredBookViewModel;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class FavoriteFragment extends Fragment {
 
     private FavouredBookViewModel favouredBookViewModel;
     private BookListAdaptor adaptor;
+
     public static FavoriteFragment newInstance() {
         FavoriteFragment fragment = new FavoriteFragment();
 
@@ -65,11 +67,17 @@ public class FavoriteFragment extends Fragment {
         favouredBookViewModel.getFavouredBooks().observe(getActivity(), new Observer<List<FavouredBook>>() {
             @Override
             public void onChanged(List<FavouredBook> favouredBooks) {
-                List<Book> books = new ArrayList<>();
-                for (FavouredBook favouredBook : favouredBooks) {
-                    books.add(GoogleFacadeImpl.getINSTANCE().findById(favouredBook.getBookId()));
-                }
-                adaptor.setBookList(books);
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        List<Book> books = new ArrayList<>();
+                        for (FavouredBook favouredBook : favouredBooks) {
+                            books.add(GoogleFacadeImpl.getINSTANCE().findById(favouredBook.getBookId()));
+                        }
+                        adaptor.setBookList(books);
+                    }
+                }).start();
             }
         });
     }

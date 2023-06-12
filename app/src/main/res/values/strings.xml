@@ -29,6 +29,7 @@
     <string name="address_hint">enter your address…</string>
     <string name="arrival_date">Arrival Date</string>
     <string name="pick_date">pick arrival date</string>
+    <string name="purchase">purchase</string>
 
     <!-- settings -->
     <string name="theme">theme</string>

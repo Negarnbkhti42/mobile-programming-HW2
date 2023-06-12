@@ -42,6 +42,7 @@ public class BookListAdaptor extends RecyclerView.Adapter<BookViewHolder> {
         }
         authors.delete(authors.length() - 2, authors.length());
 
+        holder.book_title.setText(current.getTitle());
         holder.book_author.setText(String.format(context.getResources().getString(R.string.book_placeholder_author), authors));
         holder.book_rating.setText(String.format(context.getResources().getString(R.string.book_placeholder_rate), current.getRate()));
         holder.book_price.setText(String.format(context.getResources().getString(R.string.book_placeholder_price), current.getPrice()));
