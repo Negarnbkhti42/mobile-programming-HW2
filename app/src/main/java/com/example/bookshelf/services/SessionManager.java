@@ -9,7 +9,8 @@ import androidx.preference.PreferenceManager;
 import java.security.SecureRandom;
 
 public class SessionManager {
-        private static final String KEY_USER_ID = "userId";
+    private static final String KEY_USER_ID = "userId";
+    private static final String KEY_USER_NICKNAME = "userNickname";
     private static final String KEY_AUTH_TOKEN = "authToken";
 
     private final SharedPreferences preferences;
@@ -24,8 +25,9 @@ public class SessionManager {
         editor = preferences.edit();
     }
 
-    public void createSession(String userId, boolean keepSession) {
+    public void createSession(String userId, String nickname, boolean keepSession) {
         editor.putString(KEY_USER_ID, userId);
+        editor.putString(KEY_USER_NICKNAME, nickname);
         String authToken = generateAuthKey();
         editor.putString(KEY_AUTH_TOKEN, authToken);
         shouldSessionBeKept = keepSession;
@@ -38,6 +40,10 @@ public class SessionManager {
 
     public String getUserId() {
         return preferences.getString(KEY_USER_ID, null);
+    }
+
+public String getUserNickname() {
+        return preferences.getString(KEY_USER_NICKNAME, null);
     }
 
     public String getAuthToken() {
@@ -54,7 +60,7 @@ public class SessionManager {
         byte[] randomBytes = new byte[32];
         secureRandom.nextBytes(randomBytes);
         String authToken = Base64.encodeToString(randomBytes, Base64.DEFAULT);
-        return  authToken;
+        return authToken;
     }
 }
 

@@ -96,7 +96,7 @@ public class LoginTabFragment extends Fragment {
                 User user = dataBase.userDao().findUser(usernameText, passwordText);
                 if (user != null) {
                     // User found, perform login logic
-                    sessionManager.createSession(usernameText, rememberMe.isChecked());
+                    sessionManager.createSession(usernameText, user.getNickname(), rememberMe.isChecked());
 
                     Intent intent = new Intent(activity, HomeActivity.class);
                     startActivity(intent);

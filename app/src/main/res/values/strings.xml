@@ -46,6 +46,7 @@
     <string name="description_header">Description</string>
     <string name="comments_header">Comments</string>
     <string name="buy_book">Add to cart</string>
+    <string name="submit_comment">submit your comment</string>
     <string name="book_sample_title">crime and punishment</string>
     <string name="book_sample_author">By Fyodor Dostoevsky</string>
     <string name="book_sample_price">$25.00</string>

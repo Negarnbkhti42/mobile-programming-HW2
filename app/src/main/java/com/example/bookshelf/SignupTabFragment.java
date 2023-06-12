@@ -130,7 +130,7 @@ public class SignupTabFragment extends Fragment {
             public void run() {
                 try {
                 userDao.insert(user);
-                sessionManager.createSession(usernameText, false);
+                sessionManager.createSession(usernameText, nicknameText, false);
                 } catch (Exception e) {
                     activity.runOnUiThread(new Runnable() {
                         @Override

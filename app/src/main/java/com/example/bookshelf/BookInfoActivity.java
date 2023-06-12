@@ -6,9 +6,13 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.bookshelf.Entities.FavouredBook;
 import com.example.bookshelf.services.SessionManager;
@@ -30,6 +34,15 @@ public class BookInfoActivity extends AppCompatActivity {
 
         Button buyBookButton = (Button) findViewById(R.id.buy_book_button);
         ImageButton favoriteButton = (ImageButton) findViewById(R.id.favorite_button);
+
+        Spinner rateSpinner = (Spinner) findViewById(R.id.rate_spinner);
+
+        Button submitCommentButton = (Button) findViewById(R.id.submit_comment_button);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.rate_entries, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        rateSpinner.setAdapter(adapter);
+
         buyBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +64,32 @@ public class BookInfoActivity extends AppCompatActivity {
                     favoriteButton.setColorFilter(getResources().getColor(R.color.red));
                     bookFavorited = true;
                 }
+            }
+        });
+
+        submitCommentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String rate = rateSpinner.getSelectedItem().toString();
+                EditText commentEditText = (EditText) findViewById(R.id.comment_edit_text);
+                String comment = commentEditText.getText().toString();
+
+                if (rate.isEmpty()) {
+                    Toast.makeText(BookInfoActivity.this, "please select a rating", Toast.LENGTH_SHORT).show();
+                    rateSpinner.requestFocus();
+                    return;
+                }
+
+                if (comment.isEmpty()) {
+                    Toast.makeText(BookInfoActivity.this, "please enter a comment", Toast.LENGTH_SHORT).show();
+                    findViewById(R.id.comment_edit_text).requestFocus();
+                    return;
+                }
+
+                Toast.makeText(BookInfoActivity.this, "comment submitted", Toast.LENGTH_SHORT).show();
+
+                rateSpinner.setSelection(-1);
+                commentEditText.setText("");
             }
         });
     }

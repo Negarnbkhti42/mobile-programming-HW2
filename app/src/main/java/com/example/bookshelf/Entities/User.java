@@ -25,4 +25,8 @@ public class User implements Serializable {
 
     @ColumnInfo(name = "password")
     private String password;
+
+    public String getNickname() {
+        return nickname;
+    }
 }
