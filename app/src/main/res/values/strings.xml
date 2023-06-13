@@ -20,6 +20,11 @@
     <string name="login_tab">login</string>
     <string name="remember_me">Remember me!</string>
     <string name="settings">settings</string>
+
+    <!-- search -->
+    <string name="title">title…</string>
+    <string name="author">author…</string>
+    <string name="publisher">publisher…</string>
     <string name="search">search</string>
 
     <string name="required">*</string>

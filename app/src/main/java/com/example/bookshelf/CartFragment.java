@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 
+import com.example.bookshelf.adaptors.BookListAdaptor;
+
 
 public class CartFragment extends Fragment {
 
@@ -43,8 +45,12 @@ public class CartFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        BookListAdaptor adaptor = new BookListAdaptor();
+
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.cart_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity());
+
+        recyclerView.setAdapter(adaptor);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
     }

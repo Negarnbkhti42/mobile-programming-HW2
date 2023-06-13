@@ -19,7 +19,6 @@ import com.example.bookshelf.Entities.FavouredBook;
 import com.example.bookshelf.Google.Book;
 import com.example.bookshelf.Google.GoogleFacadeImpl;
 import com.example.bookshelf.adaptors.BookListAdaptor;
-import com.example.bookshelf.models.BookOverview;
 import com.example.bookshelf.viewmodels.FavouredBookViewModel;
 
 import java.util.ArrayList;
@@ -59,7 +58,10 @@ public class FavoriteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        adaptor = new BookListAdaptor();
+
         RecyclerView recyclerView = view.findViewById(R.id.favorite_recycler_view);
+        recyclerView.setAdapter(adaptor);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         favouredBookViewModel = new ViewModelProvider(getActivity()).get(FavouredBookViewModel.class);
@@ -75,7 +77,7 @@ public class FavoriteFragment extends Fragment {
                         for (FavouredBook favouredBook : favouredBooks) {
                             books.add(GoogleFacadeImpl.getINSTANCE().findById(favouredBook.getBookId()));
                         }
-                        adaptor.setBookList(books);
+//                        adaptor.setBookList(books);
                     }
                 }).start();
             }
