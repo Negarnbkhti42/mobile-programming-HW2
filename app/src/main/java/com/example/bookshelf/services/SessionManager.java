@@ -42,7 +42,7 @@ public class SessionManager {
         return preferences.getString(KEY_USER_ID, null);
     }
 
-public String getUserNickname() {
+    public String getUserNickname() {
         return preferences.getString(KEY_USER_NICKNAME, null);
     }
 

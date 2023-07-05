@@ -1,12 +1,13 @@
-package com.example.bookshelf;
-
-import android.app.Activity;
+package com.example.bookshelf.adaptors;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.example.bookshelf.LoginTabFragment;
+import com.example.bookshelf.SignupTabFragment;
 
 public class RegisterationViewAdapter extends FragmentStateAdapter {
 

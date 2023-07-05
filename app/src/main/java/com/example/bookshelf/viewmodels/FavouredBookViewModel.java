@@ -17,14 +17,10 @@ import kotlinx.coroutines.Dispatchers;
 
 public class FavouredBookViewModel extends ViewModel {
 
-    private LiveData<List<FavouredBook>> getUserFavouredBooks;
     private FavouredBookRepository repository;
 
-    public FavouredBookViewModel(Application application) {
-        FavouredBookDao favouredBookDao = BookShelfDataBase.getDatabase(application).favouredBookDao();
-        SessionManager sessionManager = new SessionManager(application);
-        repository = new FavouredBookRepository(favouredBookDao, sessionManager.getUserId());
-        getUserFavouredBooks = repository.getFavouredBooks();
+    public FavouredBookViewModel() {
+        repository = FavouredBookRepository.getInstance();
     }
 
     public void insert(FavouredBook book) {
@@ -35,7 +31,7 @@ public class FavouredBookViewModel extends ViewModel {
         repository.delete(book);
     }
 
-    public LiveData<List<FavouredBook>> getFavouredBooks() {
-        return getUserFavouredBooks;
+    public LiveData<List<FavouredBook>> getFavouredBooks(String username) {
+        return repository.getFavouredBooks(username);
     }
 }

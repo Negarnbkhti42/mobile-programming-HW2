@@ -1,25 +1,26 @@
 package com.example.bookshelf;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ScrollView;
-
 import com.example.bookshelf.Entities.FavouredBook;
 import com.example.bookshelf.Google.Book;
+import com.example.bookshelf.Google.GoogleFacade;
 import com.example.bookshelf.Google.GoogleFacadeImpl;
+import com.example.bookshelf.Google.OpenLibraryImpl;
 import com.example.bookshelf.adaptors.BookListAdaptor;
-import com.example.bookshelf.models.BookOverview;
+import com.example.bookshelf.services.SessionManager;
 import com.example.bookshelf.viewmodels.FavouredBookViewModel;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ import java.util.List;
 
 
 public class FavoriteFragment extends Fragment {
-
+    private GoogleFacade googleFacade = OpenLibraryImpl.getINSTANCE();
     private FavouredBookViewModel favouredBookViewModel;
     private BookListAdaptor adaptor;
 
@@ -50,7 +51,7 @@ public class FavoriteFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_favorite, container, false);
         LayoutInflater inflater2 = LayoutInflater.from(getActivity());
         View v = inflater2.inflate(R.layout.layout_empty_favorite_list, null);
-        ScrollView favoriteViewGroup = rootView.findViewById(R.id.favorite_fragment_view_group);
+        LinearLayout favoriteViewGroup = rootView.findViewById(R.id.favorite_fragment_view_group);
         favoriteViewGroup.addView(v);
         return rootView;
     }
@@ -60,25 +61,22 @@ public class FavoriteFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         RecyclerView recyclerView = view.findViewById(R.id.favorite_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         favouredBookViewModel = new ViewModelProvider(getActivity()).get(FavouredBookViewModel.class);
         adaptor = new BookListAdaptor();
-        favouredBookViewModel.getFavouredBooks().observe(getActivity(), new Observer<List<FavouredBook>>() {
-            @Override
-            public void onChanged(List<FavouredBook> favouredBooks) {
+//        LiveData<List<FavouredBook>> favouredBooks = favouredBookViewModel.getFavouredBooks("amirali");
+//        if (favouredBooks != null)
+//            favouredBooks.observe(getActivity(), favouredBooks1 -> new Thread(() -> {
+//                List<Book> books = new ArrayList<>();
+//                for (FavouredBook favouredBook : favouredBooks1) {
+//                    if (!favouredBook.getBookId().equals("1")) {
+//                        books.add(googleFacade.findById(favouredBook.getBookId()));
+//                    }
+//                }
+//                adaptor.setBookList(books);
+//            }).start());
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        recyclerView.setAdapter(adaptor);
 
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        List<Book> books = new ArrayList<>();
-                        for (FavouredBook favouredBook : favouredBooks) {
-                            books.add(GoogleFacadeImpl.getINSTANCE().findById(favouredBook.getBookId()));
-                        }
-                        adaptor.setBookList(books);
-                    }
-                }).start();
-            }
-        });
     }
 }

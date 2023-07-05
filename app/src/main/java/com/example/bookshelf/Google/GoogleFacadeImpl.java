@@ -6,8 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +54,12 @@ public class GoogleFacadeImpl implements GoogleFacade {
                 result.add(book);
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Book book = new Book();
+            book.setTitle("politics in iran");
+            book.setAuthor("sryrd javad mahani");
+            List<Book> books = new ArrayList<>();
+            books.add(book);
+            return books;
         }
         return result;
     }
@@ -71,20 +74,20 @@ public class GoogleFacadeImpl implements GoogleFacade {
         query.append(urlString);
         query.append("?q=");
         if (bookFilter.getAuthor() != null) {
-            query.append(APIParameter.AUTHOR);
+            query.append(APIParameter.AUTHOR.getValue());
             query.append(bookFilter.getAuthor());
             query.append("+");
             removePlus = Boolean.TRUE;
         }
         if (bookFilter.getPublisher() != null) {
-            query.append(APIParameter.PUBLISHER);
-            query.append(bookFilter.getAuthor());
+            query.append(APIParameter.PUBLISHER.getValue());
+            query.append(bookFilter.getPublisher());
             query.append("+");
             removePlus = Boolean.TRUE;
 
         }
         if (bookFilter.getTitle() != null) {
-            query.append(APIParameter.TITLE);
+            query.append(APIParameter.TITLE.getValue());
             query.append(bookFilter.getTitle());
             query.append("+");
             removePlus = Boolean.TRUE;
@@ -96,14 +99,23 @@ public class GoogleFacadeImpl implements GoogleFacade {
     }
 
     private void fillAuthorAndTitleAndImage(Book book, JSONObject volumeInfo)
-            throws JSONException, MalformedURLException {
+            throws JSONException {
         book.setTitle(volumeInfo.getString("title"));
-        JSONArray authors = volumeInfo.getJSONArray("authors");
-        for (int j = 0; j < authors.length(); j++) {
-            book.getAuthors().add(authors.getString(j));
+        try {
+            JSONArray authors = volumeInfo.getJSONArray("authors");
+            for (int j = 0; j < authors.length(); j++) {
+                book.setAuthor(authors.getString(j));
+            }
+        } catch (Exception ignored) {
+
         }
-        String url = volumeInfo.getJSONObject("imageLinks").getString("thumbnail");
-        book.setImageThumbnail(new URL(url));
+        try {
+            JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+            String url = imageLinks.getString("thumbnail");
+            book.setImageThumbnail(url);
+        } catch (Exception ignored) {
+
+        }
     }
 
     @Override

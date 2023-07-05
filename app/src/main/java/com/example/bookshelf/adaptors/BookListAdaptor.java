@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookshelf.Google.Book;
+import com.example.bookshelf.Listener.MyItemClickListener;
 import com.example.bookshelf.R;
 import com.example.bookshelf.viewholders.BookViewHolder;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class BookListAdaptor extends RecyclerView.Adapter<BookViewHolder> {
@@ -28,7 +28,7 @@ public class BookListAdaptor extends RecyclerView.Adapter<BookViewHolder> {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.layout_book_item, parent, false);
-        return new BookViewHolder(view, this);
+        return new BookViewHolder(view, this, new MyItemClickListener());
     }
 
     @Override
@@ -37,11 +37,7 @@ public class BookListAdaptor extends RecyclerView.Adapter<BookViewHolder> {
         holder.book_title.setText(current.getTitle());
 
         StringBuilder authors = new StringBuilder();
-        for (String author : current.getAuthors()) {
-            authors.append(author).append(", ");
-        }
-        authors.delete(authors.length() - 2, authors.length());
-
+        authors.append(current.getAuthor());
         holder.book_title.setText(current.getTitle());
         holder.book_author.setText(String.format(context.getResources().getString(R.string.book_placeholder_author), authors));
         holder.book_rating.setText(String.format(context.getResources().getString(R.string.book_placeholder_rate), current.getRate()));
@@ -56,5 +52,9 @@ public class BookListAdaptor extends RecyclerView.Adapter<BookViewHolder> {
     public void setBookList(List<Book> bookList) {
         this.bookList = bookList;
         notifyDataSetChanged();
+    }
+
+    public List<Book> getBookList() {
+        return bookList;
     }
 }

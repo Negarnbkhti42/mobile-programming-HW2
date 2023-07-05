@@ -13,7 +13,7 @@ public class BookFilter {
     }
 
     public void setAuthor(String author) {
-        this.author = author;
+        this.author = author.isEmpty() ? null : author;
     }
 
     public String getTitle() {
@@ -21,7 +21,7 @@ public class BookFilter {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title.isEmpty() ? null : title;
     }
 
     public String getPublisher() {
@@ -29,6 +29,6 @@ public class BookFilter {
     }
 
     public void setPublisher(String publisher) {
-        this.publisher = publisher;
+        this.publisher = publisher.isEmpty() ? null : publisher;
     }
 }
