@@ -7,7 +7,7 @@ import com.example.bookshelf.Entities.User;
 
 public class UserRepository {
 
-    private UserDao dao;
+    private final UserDao dao;
 
     public UserRepository(UserDao dao) {
         this.dao = dao;
@@ -23,7 +23,7 @@ public class UserRepository {
     }
 
     private static class InsertAsyncTask extends AsyncTask<User, Void, Void> {
-        private UserDao asyncTaskDao;
+        private final UserDao asyncTaskDao;
 
         InsertAsyncTask(UserDao dao) {
             asyncTaskDao = dao;
@@ -37,7 +37,7 @@ public class UserRepository {
     }
 
     private static class DeleteAsyncTask extends AsyncTask<User, Void, Void> {
-        private UserDao asyncTaskDao;
+        private final UserDao asyncTaskDao;
 
         DeleteAsyncTask(UserDao dao) {
             asyncTaskDao = dao;

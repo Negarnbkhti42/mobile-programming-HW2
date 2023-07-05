@@ -7,14 +7,16 @@ import com.example.bookshelf.Dao.CommentDao;
 public class BookRepository {
     private static BookRepository bookRepository;
     private BookShelfDataBase bookShelfDatabase;
-    private CommentDao commentDao;
+    private final CommentDao commentDao;
 
     public static BookRepository getInstance() {
         return bookRepository;
     }
 
-    public static void setInstance(BookRepository repository){
-        bookRepository = repository;
+    public static void setInstance(BookRepository repository) {
+        if (bookRepository == null) {
+            bookRepository = repository;
+        }
     }
 
     public BookRepository(Application application) {

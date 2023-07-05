@@ -11,6 +11,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.bookshelf.Database.BookRepository;
+import com.example.bookshelf.Database.FavouredBookRepository;
+import com.example.bookshelf.adaptors.RegisterationViewAdapter;
 import com.example.bookshelf.services.SessionManager;
 import com.google.android.material.tabs.TabLayout;
 
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         BookRepository bookRepository = new BookRepository(getApplication());
         BookRepository.setInstance(bookRepository);
+        FavouredBookRepository favouredBookRepository = new FavouredBookRepository(getApplication());
+        FavouredBookRepository.setInstance(favouredBookRepository);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String themeValue = prefs.getString("theme", "system");
 

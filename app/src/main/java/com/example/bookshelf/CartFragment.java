@@ -1,27 +1,33 @@
 package com.example.bookshelf;
 
+import android.app.Application;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ScrollView;
-
+import com.example.bookshelf.Database.FavouredBookRepository;
+import com.example.bookshelf.Entities.FavouredBook;
 import com.example.bookshelf.adaptors.BookListAdaptor;
+import com.example.bookshelf.services.SessionManager;
+
+import java.util.List;
+import java.util.Objects;
 
 
 public class CartFragment extends Fragment {
 
     public static CartFragment newInstance() {
-        CartFragment fragment = new CartFragment();
-
-        return fragment;
+        return new CartFragment();
     }
 
     @Override
@@ -36,7 +42,7 @@ public class CartFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_cart, container, false);
         LayoutInflater inflater2 = LayoutInflater.from(getActivity());
         View v = inflater2.inflate(R.layout.layout_empty_cart, null);
-        ScrollView cartViewGroup = rootView.findViewById(R.id.cart_fragment_view_group);
+        LinearLayout cartViewGroup = rootView.findViewById(R.id.cart_fragment_view_group);
         cartViewGroup.addView(v);
         return rootView;
     }
@@ -47,7 +53,7 @@ public class CartFragment extends Fragment {
 
         BookListAdaptor adaptor = new BookListAdaptor();
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.cart_recycler_view);
+        RecyclerView recyclerView = view.findViewById(R.id.cart_recycler_view);
 
         recyclerView.setAdapter(adaptor);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

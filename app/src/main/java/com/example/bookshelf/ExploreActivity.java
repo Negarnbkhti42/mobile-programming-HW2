@@ -11,13 +11,16 @@ import android.widget.EditText;
 
 import com.example.bookshelf.Google.Book;
 import com.example.bookshelf.Google.BookFilter;
+import com.example.bookshelf.Google.GoogleFacade;
 import com.example.bookshelf.Google.GoogleFacadeImpl;
+import com.example.bookshelf.Google.OpenLibraryImpl;
 import com.example.bookshelf.adaptors.BookListAdaptor;
 
 import java.util.List;
 
 public class ExploreActivity extends AppCompatActivity {
 
+    GoogleFacade googleFacade = OpenLibraryImpl.getINSTANCE();
     RecyclerView bookRecyclerView;
     BookListAdaptor bookAdaptor;
     RecyclerView.LayoutManager bookLayoutManager;
@@ -34,12 +37,12 @@ public class ExploreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
 
-        authorEditText = (EditText) findViewById(R.id.author_edit_text);
-        titleEditText = (EditText) findViewById(R.id.title_edit_text);
-        publisherEditText = (EditText) findViewById(R.id.publisher_edit_text);
-        searchButton = (Button) findViewById(R.id.search_button);
+        authorEditText = findViewById(R.id.author_edit_text);
+        titleEditText = findViewById(R.id.title_edit_text);
+        publisherEditText =  findViewById(R.id.publisher_edit_text);
+        searchButton = findViewById(R.id.search_button);
 
-        bookRecyclerView = (RecyclerView) findViewById(R.id.book_recycler_view);
+        bookRecyclerView =  findViewById(R.id.book_recycler_view);
 
         bookAdaptor = new BookListAdaptor();
         bookRecyclerView.setAdapter(bookAdaptor);
@@ -47,21 +50,16 @@ public class ExploreActivity extends AppCompatActivity {
         bookLayoutManager = new LinearLayoutManager(this);
         bookRecyclerView.setLayoutManager(bookLayoutManager);
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bookFilter.setAuthor(authorEditText.getText().toString());
-                bookFilter.setTitle(titleEditText.getText().toString());
-                bookFilter.setPublisher(publisherEditText.getText().toString());
+        searchButton.setOnClickListener(view -> {
+            bookFilter.setAuthor(authorEditText.getText().toString());
+            bookFilter.setTitle(titleEditText.getText().toString());
+            bookFilter.setPublisher(publisherEditText.getText().toString());
 
-                new Thread(() -> {
-                    List<Book> books = GoogleFacadeImpl.getINSTANCE().searchBook(bookFilter);
-                    System.out.println(books);
-                    runOnUiThread(() -> {
-//                        bookAdaptor.setBookList(books);
-                    });
-                }).start();
-            }
+            new Thread(() -> {
+                List<Book> books = googleFacade.searchBook(bookFilter);
+                System.out.println(books);
+                runOnUiThread(() -> bookAdaptor.setBookList(books));
+            }).start();
         });
     }
 }

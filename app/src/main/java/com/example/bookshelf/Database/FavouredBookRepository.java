@@ -1,24 +1,33 @@
 package com.example.bookshelf.Database;
 
+import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
 import com.example.bookshelf.Dao.FavouredBookDao;
 import com.example.bookshelf.Entities.FavouredBook;
-import com.example.bookshelf.Google.Book;
 
 import java.util.List;
 
 public class FavouredBookRepository {
+    private final FavouredBookDao dao;
 
-    private LiveData<List<FavouredBook>> favouredBooks;
-    private FavouredBookDao dao;
+    private static FavouredBookRepository favouredBookRepository;
+
+    public static FavouredBookRepository getInstance() {
+        return favouredBookRepository;
+    }
+
+    public static void setInstance(FavouredBookRepository instance) {
+        if (favouredBookRepository == null)
+            favouredBookRepository = instance;
+    }
 
 
-    public FavouredBookRepository(FavouredBookDao dao, String username) {
-        this.dao = dao;
-        favouredBooks = dao.getUserFavoured(username);
+    public FavouredBookRepository(Application application) {
+        BookShelfDataBase bookShelfDatabase = BookShelfDataBase.getDatabase(application);
+        dao = bookShelfDatabase.favouredBookDao();
     }
 
     public void insert(FavouredBook book) {
@@ -29,8 +38,8 @@ public class FavouredBookRepository {
         new DeleteAsyncTask(dao).execute(book);
     }
 
-    public LiveData<List<FavouredBook>> getFavouredBooks() {
-        return favouredBooks;
+    public LiveData<List<FavouredBook>> getFavouredBooks(String username) {
+        return dao.getUserFavoured(username);
     }
 
     public FavouredBook find(String username, String bookId) {
@@ -42,7 +51,7 @@ public class FavouredBookRepository {
     }
 
     private static class InsertAsyncTask extends AsyncTask<FavouredBook, Void, Void> {
-        private FavouredBookDao asyncTaskDao;
+        private final FavouredBookDao asyncTaskDao;
 
         InsertAsyncTask(FavouredBookDao dao) {
             asyncTaskDao = dao;
@@ -56,7 +65,7 @@ public class FavouredBookRepository {
     }
 
     private static class DeleteAsyncTask extends AsyncTask<FavouredBook, Void, Void> {
-        private FavouredBookDao asyncTaskDao;
+        private final FavouredBookDao asyncTaskDao;
 
         DeleteAsyncTask(FavouredBookDao dao) {
             asyncTaskDao = dao;
@@ -70,7 +79,7 @@ public class FavouredBookRepository {
     }
 
     private static class FindAsyncTask extends AsyncTask<FavouredBook, Void, FavouredBook> {
-        private FavouredBookDao asyncTaskDao;
+        private final FavouredBookDao asyncTaskDao;
 
         FindAsyncTask(FavouredBookDao dao) {
             asyncTaskDao = dao;
